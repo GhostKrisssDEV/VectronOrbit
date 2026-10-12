@@ -1,0 +1,42 @@
+VECTRON ORBIT — END USER LICENSE AGREEMENT (EULA)
+Copyright (c) 2026 GhostKrisssDEV. All rights reserved.
+
+Vectron Orbit (the "Game"), including its launcher, website, program code, graphics,
+ship and character designs, music, sound effects, text, logos and the name
+"Vectron Orbit", is the exclusive property of GhostKrisssDEV and is protected by
+copyright law and international treaties.
+
+1. LICENSE GRANT
+   You may download, install and play the Game free of charge for your own personal,
+   non-commercial entertainment. This is a license to use the Game, not a sale.
+
+2. YOU MAY NOT
+   a) copy, re-upload, mirror, sell, rent, sublicense or distribute the Game or any
+      part of it, except by linking to the official website;
+   b) decompile, disassemble, unpack, reverse engineer or modify the Game files,
+      or extract its assets (graphics, sounds, music, code, data);
+   c) use any part of the Game, its name, logo or artwork in another game, product,
+      website or publication;
+   d) create or use cheats, bots, exploits or tools that modify or automate the Game
+      or interfere with other players;
+   e) remove or alter any copyright notice.
+
+3. FREE TO PLAY
+   The Game is free to play and not pay to win. Donations are voluntary, give no
+   in-game advantage and are not refundable.
+
+4. TERMINATION
+   This license ends automatically if you break any of its terms. You must then
+   delete all copies of the Game.
+
+5. NO WARRANTY / LIMITATION OF LIABILITY
+   The Game is provided "as is", without warranty of any kind. To the maximum extent
+   permitted by law, GhostKrisssDEV is not liable for any damages arising from the
+   use of, or inability to use, the Game.
+
+6. COPYRIGHT INFRINGEMENT
+   Unauthorized copies or uses will be reported (DMCA / platform takedown notices).
+   Contact: ghostkrisss@gmail.com
+
+By installing or playing the Game you accept this agreement.
+Official website: https://vectronorbit.pages.dev

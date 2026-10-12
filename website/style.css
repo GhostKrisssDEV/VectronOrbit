@@ -1,0 +1,208 @@
+/* Vectron Orbit - official website. (c) 2026 GhostKrisssDEV. All rights reserved. */
+@font-face { font-family: "Orbitron"; src: url("assets/fonts/Orbitron.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Rajdhani"; src: url("assets/fonts/Rajdhani-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Rajdhani"; src: url("assets/fonts/Rajdhani-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Mono"; src: url("assets/fonts/ShareTechMono-Regular.ttf") format("truetype"); font-display: swap; }
+
+:root {
+  --bg: #03050c;
+  --panel: rgba(8, 16, 32, 0.78);
+  --line: rgba(90, 220, 255, 0.28);
+  --cyan: #5ae6ff;
+  --magenta: #ff3f9a;
+  --gold: #ffcc5c;
+  --green: #66ff9a;
+  --text: #d9ecff;
+  --dim: #8ea3bd;
+  --radius: 10px;
+  --max: 1200px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Rajdhani", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; -webkit-user-drag: none; user-select: none; }
+a { color: var(--cyan); text-decoration: none; }
+#stars { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; }
+
+/* ---------- navigation ---------- */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px clamp(16px, 4vw, 40px);
+  background: linear-gradient(180deg, rgba(3, 5, 12, 0.92), rgba(3, 5, 12, 0.6));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .brand { display: flex; align-items: center; gap: 10px; font-family: "Orbitron"; letter-spacing: 3px; font-size: 15px; color: var(--text); }
+.nav .brand img { width: 34px; height: 34px; }
+.nav ul { display: flex; gap: 22px; list-style: none; align-items: center; }
+.nav ul a { color: var(--dim); font-size: 16px; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
+.nav ul a:hover, .nav ul a.active { color: var(--cyan); }
+.burger { display: none; background: none; border: 1px solid var(--line); color: var(--text); font-size: 22px; padding: 4px 12px; border-radius: 6px; cursor: pointer; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+  font-family: "Orbitron"; font-size: 15px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 14px 26px; border-radius: 8px; border: 2px solid var(--cyan);
+  color: #fff; background: rgba(40, 140, 200, 0.18);
+  box-shadow: 0 0 18px rgba(90, 230, 255, 0.35), inset 0 0 18px rgba(90, 230, 255, 0.12);
+  transition: transform .15s, box-shadow .2s, background .2s; cursor: pointer;
+}
+.btn:hover { transform: translateY(-2px); background: rgba(40, 160, 220, 0.32); box-shadow: 0 0 34px rgba(90, 230, 255, 0.6), inset 0 0 18px rgba(90, 230, 255, 0.2); }
+.btn.primary { border-color: var(--gold); background: linear-gradient(135deg, rgba(255, 170, 40, 0.35), rgba(255, 70, 140, 0.25)); box-shadow: 0 0 26px rgba(255, 190, 80, 0.45); }
+.btn.primary:hover { box-shadow: 0 0 44px rgba(255, 190, 80, 0.75); }
+.btn.small { padding: 9px 16px; font-size: 12px; }
+.btn.ghost { border-color: var(--line); box-shadow: none; background: rgba(255, 255, 255, 0.03); }
+.btn.donate { border-color: var(--magenta); background: rgba(255, 63, 154, 0.18); box-shadow: 0 0 26px rgba(255, 63, 154, 0.4); }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative; min-height: 100vh; min-height: 100svh;
+  display: flex; align-items: center;
+  padding: 84px clamp(16px, 5vw, 70px) 60px;
+  background: url("assets/hero.jpg") center / cover no-repeat;
+  overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(3, 5, 12, 0.95) 0%, rgba(3, 5, 12, 0.65) 45%, rgba(3, 5, 12, 0.1) 75%),
+              linear-gradient(0deg, var(--bg) 0%, rgba(3, 5, 12, 0) 30%);
+}
+.hero .inner { position: relative; max-width: 620px; animation: rise .9s ease-out both; }
+.hero .logo { width: min(320px, 70vw); margin-left: -18px; filter: drop-shadow(0 0 30px rgba(90, 230, 255, 0.45)); }
+.hero h1 { font-family: "Orbitron"; font-size: clamp(22px, 3.2vw, 34px); letter-spacing: 3px; margin: 8px 0 12px; line-height: 1.25; }
+.hero h1 span { color: var(--gold); }
+.hero p.lead { color: var(--text); font-size: clamp(17px, 2vw, 21px); max-width: 560px; }
+.badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 26px; }
+.badge { font-family: "Mono"; font-size: 13px; letter-spacing: 1px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 20px; color: var(--cyan); background: rgba(90, 230, 255, 0.07); }
+.badge.f2p { color: var(--green); border-color: rgba(102, 255, 154, 0.4); background: rgba(102, 255, 154, 0.08); }
+.cta { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero .meta { margin-top: 14px; color: var(--dim); font-family: "Mono"; font-size: 13px; }
+.scroll-hint { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); color: var(--dim); font-family: "Mono"; font-size: 12px; letter-spacing: 2px; animation: bob 2s infinite; }
+
+/* ---------- sections ---------- */
+section { padding: clamp(60px, 9vw, 110px) clamp(16px, 5vw, 40px); }
+.wrap { max-width: var(--max); margin: 0 auto; }
+.kicker { font-family: "Mono"; color: var(--magenta); letter-spacing: 3px; font-size: 13px; text-transform: uppercase; }
+h2 { font-family: "Orbitron"; font-size: clamp(26px, 4vw, 42px); letter-spacing: 2px; margin: 6px 0 14px; }
+h2 .glow { color: var(--cyan); text-shadow: 0 0 22px rgba(90, 230, 255, 0.6); }
+.sub { color: var(--dim); max-width: 720px; margin-bottom: 36px; }
+
+.grid { display: grid; gap: 18px; }
+.features { grid-template-columns: repeat(3, 1fr); }
+.card {
+  position: relative; padding: 24px; border-radius: var(--radius);
+  background: var(--panel); border: 1px solid var(--line);
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+  overflow: hidden;
+}
+.card::after { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: linear-gradient(90deg, var(--cyan), var(--magenta)); opacity: .7; }
+.card:hover { transform: translateY(-4px); border-color: rgba(90, 230, 255, 0.6); box-shadow: 0 10px 40px rgba(90, 230, 255, 0.15); }
+.card .ico { font-size: 30px; margin-bottom: 10px; }
+.card h3 { font-family: "Orbitron"; font-size: 17px; letter-spacing: 1.5px; margin-bottom: 8px; }
+.card p { color: var(--dim); font-size: 17px; }
+
+/* ships */
+.ships { grid-template-columns: repeat(4, 1fr); }
+.ship { text-align: center; padding: 18px 14px 20px; }
+.ship img { height: 190px; width: auto; margin: 0 auto 12px; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.7)); transition: transform .3s; }
+.ship:hover img { transform: scale(1.06) rotate(-2deg); }
+.ship h3 { margin-bottom: 2px; }
+.ship .cls { font-family: "Mono"; font-size: 12px; color: var(--magenta); letter-spacing: 2px; }
+.ship .stats { font-family: "Mono"; font-size: 13px; color: var(--dim); margin-top: 6px; }
+
+/* gallery */
+.gallery { grid-template-columns: repeat(3, 1fr); }
+.shot { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); cursor: zoom-in; aspect-ratio: 16 / 9; }
+.shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.shot:hover img { transform: scale(1.06); }
+.shot span { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 10px; font-family: "Orbitron"; font-size: 13px; letter-spacing: 2px; background: linear-gradient(0deg, rgba(0, 0, 0, 0.85), transparent); }
+.lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.92); padding: 20px; }
+.lightbox.open { display: flex; }
+.lightbox img { max-height: 90vh; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 0 60px rgba(90, 230, 255, 0.25); }
+.lightbox button { position: absolute; top: 14px; right: 18px; background: none; border: none; color: #fff; font-size: 34px; cursor: pointer; }
+
+/* updates */
+.updates { grid-template-columns: repeat(2, 1fr); }
+.update .ver { font-family: "Mono"; color: var(--magenta); font-size: 13px; letter-spacing: 2px; }
+.update h3 { margin: 4px 0 8px; }
+.update ul { margin: 10px 0 0 18px; color: var(--dim); font-size: 16px; }
+.update li { margin-bottom: 4px; }
+
+/* f2p / donate */
+.support { display: grid; grid-template-columns: 1.3fr 1fr; gap: 26px; align-items: center; }
+.support .panel { padding: clamp(22px, 4vw, 40px); border-radius: var(--radius); border: 1px solid rgba(255, 63, 154, 0.45); background: linear-gradient(135deg, rgba(255, 63, 154, 0.12), rgba(90, 230, 255, 0.06)); }
+.support .big { font-family: "Orbitron"; font-size: clamp(30px, 6vw, 64px); line-height: 1; color: var(--green); text-shadow: 0 0 30px rgba(102, 255, 154, 0.5); }
+.support .big small { display: block; font-size: 0.35em; color: var(--text); letter-spacing: 3px; margin-top: 10px; }
+
+/* contact */
+.contact { grid-template-columns: repeat(2, 1fr); }
+.contact .card { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.contact .card .btn { margin-top: auto; }
+
+/* patch notes page */
+.timeline { position: relative; margin-left: 10px; padding-left: 26px; border-left: 2px solid var(--line); }
+.timeline .entry { position: relative; margin-bottom: 30px; }
+.timeline .entry::before { content: ""; position: absolute; left: -35px; top: 26px; width: 14px; height: 14px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 16px var(--cyan); }
+.timeline .entry.latest::before { background: var(--gold); box-shadow: 0 0 18px var(--gold); }
+.page-head { padding-top: 130px; padding-bottom: 20px; }
+
+/* legal */
+.legal h3 { font-family: "Orbitron"; font-size: 16px; margin: 22px 0 8px; color: var(--cyan); }
+.legal p, .legal li { color: var(--dim); }
+.legal ul { margin-left: 20px; }
+
+/* footer */
+footer { border-top: 1px solid var(--line); padding: 34px clamp(16px, 5vw, 40px); background: rgba(3, 5, 12, 0.9); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
+footer p { color: var(--dim); font-size: 14px; font-family: "Mono"; }
+footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
+footer nav a { color: var(--dim); font-size: 15px; }
+footer nav a:hover { color: var(--cyan); }
+
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s, transform .8s; }
+.reveal.in { opacity: 1; transform: none; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }
+
+/* ---------- tablet ---------- */
+@media (max-width: 980px) {
+  .features, .gallery { grid-template-columns: repeat(2, 1fr); }
+  .ships { grid-template-columns: repeat(2, 1fr); }
+  .support { grid-template-columns: 1fr; }
+}
+
+/* ---------- phone ---------- */
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  .burger { display: block; }
+  .nav ul {
+    position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
+    background: rgba(3, 5, 12, 0.97); border-bottom: 1px solid var(--line);
+    max-height: 0; overflow: hidden; transition: max-height .3s;
+  }
+  .nav ul.open { max-height: 480px; }
+  .nav ul li { width: 100%; text-align: center; border-top: 1px solid rgba(90, 220, 255, 0.08); }
+  .nav ul a { display: block; padding: 14px; }
+  .nav ul .btn { margin: 12px auto; }
+  .hero { background-position: 70% center; align-items: flex-end; }
+  .hero::before { background: linear-gradient(0deg, rgba(3, 5, 12, 0.98) 0%, rgba(3, 5, 12, 0.75) 55%, rgba(3, 5, 12, 0.25) 100%); }
+  .features, .gallery, .updates, .contact { grid-template-columns: 1fr; }
+  .ships { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .ship img { height: 130px; }
+  .cta .btn { flex: 1 1 100%; }
+  .scroll-hint { display: none; }
+  .btn { padding: 12px 16px; font-size: 13px; letter-spacing: 1px; max-width: 100%; white-space: normal; text-align: center; word-break: break-word; }
+  .contact .card .btn { width: 100%; }
+}
