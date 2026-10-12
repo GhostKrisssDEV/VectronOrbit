@@ -1,0 +1,36 @@
+# Posts the patch notes to Discord when a new GitHub release is published.
+# Setup (once): GitHub repo -> Settings -> Secrets and variables -> Actions ->
+#   New repository secret, Name: DISCORD_WEBHOOK, Secret: <your webhook URL>.
+# The webhook URL lives ONLY in that secret - never put it in this file or in chat.
+name: Discord release notes
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.release.tag_name != 'launcher' }}
+    steps:
+      - name: Send to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          TAG: ${{ github.event.release.tag_name }}
+          NAME: ${{ github.event.release.name }}
+          BODY: ${{ github.event.release.body }}
+          URL: ${{ github.event.release.html_url }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then
+            echo "DISCORD_WEBHOOK secret is not set - skipping."
+            exit 0
+          fi
+          TITLE="${NAME:-Vectron Orbit $TAG}"
+          TEXT="$(printf '%s' "$BODY" | head -c 3800)"
+          jq -n --arg t "$TITLE" --arg d "$TEXT" --arg u "$URL" '{
+            username: "Vectron Orbit",
+            content: "**New update is live!** Open the launcher and press UPDATE.",
+            embeds: [{ title: $t, url: "https://vectronorbit.space/patch-notes.html", description: $d, color: 16762701,
+                       footer: { text: "Vectron Orbit · GhostKrisssDEV" } }]
+          }' > payload.json
+          curl -sS -f -H "Content-Type: application/json" -d @payload.json "$WEBHOOK"
